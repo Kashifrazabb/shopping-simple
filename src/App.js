@@ -1,5 +1,5 @@
 import React from 'react';
-import Data from './components/Data';
+import Main from './components/Main';
 import Home from './components/Home';
 import {Switch,Route,Redirect} from 'react-router-dom';
 
@@ -7,8 +7,8 @@ const App = () => {
     return (
         <Switch>
             <Route path='/home' render={()=><Home/>}></Route>
-            <Route path='/men' render={()=><Data/>}></Route>
-            <Route path='/women' render={()=><Data/>}></Route>
+            <Route path='/men' render={()=><Main/>}></Route>
+            <Route path='/women' render={()=><Main/>}></Route>
             <Redirect from='/' to='/home' />
         </Switch>
     )
