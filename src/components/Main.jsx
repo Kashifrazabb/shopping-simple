@@ -7,12 +7,14 @@ import Navbar from './Navbar';
 import { useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles({
-  root: {
-    fontSize: '35px'
+  thead: {
+    fontSize: '35px',
+    color:'crimson'
   },
   tableProp: {
     margin: '100px auto 0',
     width: '90%',
+    overflow:'hidden'
   },
   imgProp: {
     width: '100px',
@@ -33,12 +35,12 @@ const Data = () => {
       <TableContainer component={Paper} className={classes.tableProp}>
         <Table>
 
-          <TableHead>
+          <TableHead id='thead'>
             <TableRow>
-              <TableCell align='center' className={classes.root}><b>Sr.No.</b></TableCell>
-              <TableCell align='center' className={classes.root}><b>Image</b></TableCell>
-              <TableCell align='center' className={classes.root}><b>Name</b></TableCell>
-              <TableCell align='center' className={classes.root}><b>Price</b></TableCell>
+              <TableCell align='center' className={classes.thead}><b>Sr.No.</b></TableCell>
+              <TableCell align='center' className={classes.thead}><b>Image</b></TableCell>
+              <TableCell align='center' className={classes.thead}><b>Name</b></TableCell>
+              <TableCell align='center' className={classes.thead}><b>Price</b></TableCell>
             </TableRow>
           </TableHead>
 

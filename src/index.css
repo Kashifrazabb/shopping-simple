@@ -6,8 +6,12 @@
     
     .active{color:crimson !important;}
 
-    .items_img{width:100px}
+    .items_img{width:100px;}
 
     .items_img:hover{transform: scale(1.5); }
 
-    
+    #tr{cursor: pointer;}
+
+    #tr:hover{background: #F2F1ED}
+
+    #thead > *{color:crimson}
