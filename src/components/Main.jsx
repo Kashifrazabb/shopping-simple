@@ -1,36 +1,36 @@
 import React from 'react';
-import {TableContainer,Table,TableHead,TableBody,TableRow,TableCell,Paper} from '@material-ui/core';
-import {makeStyles} from '@material-ui/styles';
+import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import Men from './Men';
 import Women from './Women';
 import Navbar from './Navbar';
-import {useLocation} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-const useStyles=makeStyles({
-  root:{
-    fontSize:'35px'
+const useStyles = makeStyles({
+  root: {
+    fontSize: '35px'
   },
-  tableProp:{
-    margin:'100px auto 0',
-    width:'90%',
+  tableProp: {
+    margin: '100px auto 0',
+    width: '90%',
   },
-  imgProp:{
-    width:'100px',
-    cursor:'pointer',
-    '&:hover':{
-      transform:'scale(2)'
+  imgProp: {
+    width: '100px',
+    cursor: 'pointer',
+    '&:hover': {
+      transform: 'scale(2)'
     }
   }
 })
 
 const Data = () => {
-  const classes=useStyles();
-  const location=useLocation();
-  
-    return (
-      <>
-      <Navbar/>
-        <TableContainer component={Paper} className={classes.tableProp}>
+  const classes = useStyles();
+  const location = useLocation();
+
+  return (
+    <>
+      <Navbar />
+      <TableContainer component={Paper} className={classes.tableProp}>
         <Table>
 
           <TableHead>
@@ -43,16 +43,16 @@ const Data = () => {
           </TableHead>
 
           <TableBody>
- 
-            {(location.pathname==='/men')?<Men/>:
-            (location.pathname==='/women')?<Women/>:null}
-            
+
+            {(location.pathname === '/men') ? <Men /> :
+              (location.pathname === '/women') ? <Women /> : null}
+
           </TableBody>
 
         </Table>
       </TableContainer>
-      </>
-    )
+    </>
+  )
 }
 
 export default Data;
