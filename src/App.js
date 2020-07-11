@@ -11,9 +11,12 @@ import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 const App = () => {
     const history = useHistory();
     const [ID, setID] = useState(0);
-    const [cartBnt, setCartBtn] = useState(true);
+    const [cartBtn, setCartBtn] = useState(true);
     const [count, setCount] = useState(0);
-    const [data, setData] = useState([{ name: '', price: '',id:'' }]);
+    const [quantity, setQuantity] = useState(1);
+    const [pop,setPop]=useState(false);
+    const [edit,setEdit]=useState('');
+    const [data, setData] = useState([{ name: '', price: '', id: '',quantity:1 }]);
 
     const handleClick = (e) => {
         setCartBtn(true)
@@ -21,10 +24,34 @@ const App = () => {
         history.push('/about')
     }
 
+    const handleQuantity = (e) => setQuantity(e.target.value)
+    const onEdit=(e)=>setEdit(e.target.value)
+
     const handleCart = () => {
         setCartBtn(false)
-        setCount(count+1)
-        setData([...data, { name: NAME, price: PRICE,id:uuid() }])
+        setData([...data, { name: NAME, price: PRICE, id: uuid(),quantity}])
+        setCount(data.length)
+    }
+
+    const handleDelete=id=>{
+        setData(data.filter(v=>v.id!==id))
+        setCount(data.filter(v=>v.id!==id).length-1)
+    }
+
+    const handleEdit=(id)=>{
+        const {quantity}=data.find(i=>i.id===id)
+        setEdit(quantity)
+        setPop(true)
+    }
+
+    const handleEditDone=(id)=>{
+        setData(data.map(item=>item.id===id?{id,quantity:edit,name:NAME,price:PRICE}:item))
+        setPop(false)
+    }
+
+    const handleClear=()=>{
+        setData([])
+        setCount(0)
     }
 
     var INDEX, NAME, IMGSRC, PRICE;
@@ -45,20 +72,25 @@ const App = () => {
             PRICE = WomenData[INDEX].price;
         }
     }
-    return(
-    <>
-        <Navbar count={count}/>
-        <Switch>
-            <Route exact path='/home' render={() => <Home />}/>
-            <Route exact path='/men' render={() => <Main handleClick={handleClick} />}/>
-            <Route exact path='/women' render={() => <Main handleClick={handleClick} />}/>
-            <Route exact path='/about' render={() => <About IMGSRC={IMGSRC} NAME={NAME} PRICE={PRICE} handleCart={handleCart} cartBnt={cartBnt} />}/>
-            <Route exact path='/history' render={() => <History data={data} count={count}/>}/>
-            <Redirect from='/men/*' to='/men' />
-            <Redirect from='/women/*' to='/women' />
-            <Redirect from='/' to='/home' />
+    return (
+        <>
+            <Navbar count={count} />
+            <Switch>
+                <Route exact path='/home' render={() => <Home />} />
+                <Route exact path='/men' render={() => <Main handleClick={handleClick} />} />
+                <Route exact path='/women' render={() => <Main handleClick={handleClick} />} />
+                <Route exact path='/about' render={() => <About IMGSRC={IMGSRC} NAME={NAME}
+                    PRICE={PRICE} handleCart={handleCart} cartBtn={cartBtn}
+                    handleQuantity={handleQuantity} quantity={quantity} />} />
+                <Route exact path='/history' render={() => <History data={data} 
+                count={count} handleDelete={handleDelete} handleEdit={handleEdit} 
+                pop={pop} onEdit={onEdit} handleEditDone={handleEditDone} edit={edit}
+                handleClear={handleClear}/>} />
+                <Redirect from='/men/*' to='/men' />
+                <Redirect from='/women/*' to='/women' />
+                <Redirect from='/' to='/home' />
         </Switch>
-    </>
+        </>
     )
 }
 export default App;

@@ -5,8 +5,6 @@ import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles({
   root: {
-    cursor: 'pointer',
-    textDecoration:'none',
     '&:hover': {
       background: '#F2F1ED'
     }
