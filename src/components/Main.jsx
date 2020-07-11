@@ -3,7 +3,6 @@ import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper
 import { makeStyles } from '@material-ui/styles';
 import Men from './Men';
 import Women from './Women';
-import Navbar from './Navbar';
 import { useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles({
@@ -25,13 +24,12 @@ const useStyles = makeStyles({
   }
 })
 
-const Data = () => {
+const Main = ({handleClick}) => {
   const classes = useStyles();
   const location = useLocation();
 
   return (
     <>
-      <Navbar />
       <TableContainer component={Paper} className={classes.tableProp}>
         <Table>
 
@@ -46,8 +44,8 @@ const Data = () => {
 
           <TableBody>
 
-            {(location.pathname === '/men') ? <Men /> :
-              (location.pathname === '/women') ? <Women /> : null}
+            {(location.pathname === '/men') ? <Men handleClick={handleClick}/> :
+              (location.pathname === '/women') ? <Women handleClick={handleClick}/> : null}
 
           </TableBody>
 
@@ -57,4 +55,4 @@ const Data = () => {
   )
 }
 
-export default Data;
+export default Main;
